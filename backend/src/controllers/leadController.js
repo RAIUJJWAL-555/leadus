@@ -1,4 +1,4 @@
-import { leadSchema, statusEnum } from "../../../shared/validation.js";
+import { leadSchema, statusEnum } from "../shared/validation.js";
 import Lead from "../models/Lead.js";
 
 export async function createLead(req, res) {
