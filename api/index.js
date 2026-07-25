@@ -21,6 +21,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api/leads", leadRoutes);
 app.get("/api/health", (_, res) => res.json({ status: "ok" }));
 
+app.use("/auth", authRoutes);
+app.use("/leads", leadRoutes);
+app.get("/health", (_, res) => res.json({ status: "ok" }));
+
 app.all("/{*splat}", async (req, res) => {
   await connectDB();
   res.json({ status: "ok", message: "LeadDesk Mini API" });
