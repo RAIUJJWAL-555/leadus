@@ -1,5 +1,6 @@
 import "dotenv/config";
 import path from "path";
+import fs from "fs";
 import { fileURLToPath } from "url";
 import express from "express";
 import cors from "cors";
@@ -20,10 +21,16 @@ app.use("/api/leads", leadRoutes);
 app.get("/api/health", (_, res) => res.json({ status: "ok" }));
 
 const frontendDist = path.join(__dirname, "../../frontend/dist");
-app.use(express.static(frontendDist));
-app.get("/{*splat}", (_, res) => {
-  res.sendFile(path.join(frontendDist, "index.html"));
-});
+if (fs.existsSync(frontendDist)) {
+  app.use(express.static(frontendDist));
+  app.get("/{*splat}", (_, res) => {
+    res.sendFile(path.join(frontendDist, "index.html"));
+  });
+} else {
+  app.get("/", (_, res) => {
+    res.json({ status: "ok", message: "LeadDesk Mini API" });
+  });
+}
 
 connectDB()
   .then(() => {
