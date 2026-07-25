@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { leadSchema } from "../../../shared/validation.js";
+import { leadSchema } from "../lib/validation.js";
 import api from "../lib/api.js";
 
 const budgetLabels = {
