@@ -182,6 +182,7 @@ export default function AdminDashboard() {
                   <tr className="border-b border-border text-text-muted">
                     <th className="px-4 py-3 font-medium">Name</th>
                     <th className="px-4 py-3 font-medium">Email</th>
+                    <th className="px-4 py-3 font-medium">Message</th>
                     <th className="px-4 py-3 font-medium">Budget</th>
                     <th className="px-4 py-3 font-medium">Status</th>
                     <th className="px-4 py-3 font-medium">Submitted</th>
@@ -196,6 +197,9 @@ export default function AdminDashboard() {
                       <td className="px-4 py-3 text-text">{lead.name}</td>
                       <td className="px-4 py-3 text-text-muted">
                         {lead.email}
+                      </td>
+                      <td className="max-w-xs truncate px-4 py-3 text-text-muted" title={lead.message}>
+                        {lead.message}
                       </td>
                       <td className="px-4 py-3 text-text-muted">
                         {budgetLabels[lead.budget] || lead.budget}
