@@ -47,3 +47,36 @@ body {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+@keyframes rotate-slow {
+  0% { transform: translate(300px, 190px) rotate(0deg) translate(-300px, -190px); }
+  100% { transform: translate(300px, 190px) rotate(360deg) translate(-300px, -190px); }
+}
+
+@keyframes orbit-reverse {
+  0% { transform: translate(300px, 190px) rotate(360deg) translate(-300px, -190px); }
+  100% { transform: translate(300px, 190px) rotate(0deg) translate(-300px, -190px); }
+}
+
+.animate-orbit {
+  transform-origin: 300px 190px;
+  animation: rotate-slow 12s linear infinite;
+}
+
+.animate-orbit-reverse {
+  transform-origin: 300px 190px;
+  animation: orbit-reverse 18s linear infinite;
+}
+
+.grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 75%);
+}
+
+.text-glow {
+  text-shadow: 0 0 40px rgba(168, 85, 247, 0.2);
+}
+
