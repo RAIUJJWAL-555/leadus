@@ -149,7 +149,7 @@ function HalftoneHands() {
   );
 }
 
-export default function Hero() {
+export default function Hero({ onGetStarted }) {
   return (
     <section className="relative overflow-hidden bg-black pt-32 pb-8 md:pt-40 md:pb-12">
       {/* Background radial glow */}
@@ -170,15 +170,15 @@ export default function Hero() {
           Track every prospect from first touch to closed deal — no bloat, no complexity.
         </p>
 
-        <a
-          href="#form"
+        <button
+          onClick={onGetStarted}
           className="mt-8 inline-flex items-center gap-2 rounded-full border border-neutral-700 bg-transparent px-6 py-3 text-sm font-medium text-white transition-all hover:border-neutral-500 hover:bg-white/5"
         >
           Get Started
           <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
-        </a>
+        </button>
       </div>
 
       {/* Halftone hands visual */}
