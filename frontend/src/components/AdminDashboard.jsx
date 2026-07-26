@@ -57,7 +57,7 @@ export default function AdminDashboard() {
       if (debouncedSearch) params.search = debouncedSearch;
       if (status) params.status = status;
 
-      const { data } = await api.get("/leads", {
+      const { data } = await api.get("/api/leads", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -78,7 +78,7 @@ export default function AdminDashboard() {
   const handleStatusChange = async (leadId, newStatus) => {
     try {
       await api.patch(
-        `/leads/${leadId}/status`,
+        `/api/leads/${leadId}/status`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );

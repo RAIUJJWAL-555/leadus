@@ -59,7 +59,7 @@ export default function LeadCaptureForm() {
     setSubmitting(true);
 
     try {
-      await api.post("/leads", data);
+      await api.post("/api/leads", data);
       showToast("Lead submitted successfully! We'll be in touch soon.", "success");
       reset();
     } catch (err) {
