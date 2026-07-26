@@ -37,6 +37,7 @@ export default function AdminDashboard() {
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedLead, setSelectedLead] = useState(null);
   const debounceRef = useRef(null);
 
   useEffect(() => {
@@ -192,7 +193,8 @@ export default function AdminDashboard() {
                   {leads.map((lead) => (
                     <tr
                       key={lead._id}
-                      className="border-b border-border last:border-0"
+                      onClick={() => setSelectedLead(lead)}
+                      className="cursor-pointer border-b border-border last:border-0 transition-colors hover:bg-white/5"
                     >
                       <td className="px-4 py-3 text-text">{lead.name}</td>
                       <td className="px-4 py-3 text-text-muted">
@@ -207,6 +209,7 @@ export default function AdminDashboard() {
                       <td className="px-4 py-3">
                         <select
                           value={lead.status}
+                          onClick={(e) => e.stopPropagation()}
                           onChange={(e) =>
                             handleStatusChange(lead._id, e.target.value)
                           }
@@ -255,6 +258,59 @@ export default function AdminDashboard() {
           </>
         )}
       </main>
+
+      {selectedLead && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+          onClick={() => setSelectedLead(null)}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="mx-4 w-full max-w-lg rounded-2xl border border-border bg-surface-raised p-6 shadow-2xl"
+          >
+            <div className="mb-6 flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-text">Lead Details</h2>
+              <button
+                onClick={() => setSelectedLead(null)}
+                className="rounded-lg p-1 text-text-muted transition-colors hover:text-text"
+              >
+                <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <p className="text-xs font-medium text-text-muted">Name</p>
+                <p className="text-text">{selectedLead.name}</p>
+              </div>
+              <div>
+                <p className="text-xs font-medium text-text-muted">Email</p>
+                <p className="text-text">{selectedLead.email}</p>
+              </div>
+              <div>
+                <p className="text-xs font-medium text-text-muted">Budget</p>
+                <p className="text-text">{budgetLabels[selectedLead.budget] || selectedLead.budget}</p>
+              </div>
+              <div>
+                <p className="text-xs font-medium text-text-muted">Status</p>
+                <span className={`inline-block rounded-lg px-2 py-1 text-xs font-medium ${statusStyles[selectedLead.status] || ""}`}>
+                  {selectedLead.status}
+                </span>
+              </div>
+              <div>
+                <p className="text-xs font-medium text-text-muted">Message</p>
+                <p className="whitespace-pre-wrap text-text">{selectedLead.message}</p>
+              </div>
+              <div>
+                <p className="text-xs font-medium text-text-muted">Submitted</p>
+                <p className="text-text">{formatDate(selectedLead.createdAt)}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
