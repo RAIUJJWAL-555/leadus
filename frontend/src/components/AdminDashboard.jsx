@@ -59,6 +59,7 @@ export default function AdminDashboard() {
       if (status) params.status = status;
 
       const { data } = await api.get("/api/leads", {
+        params,
         headers: { Authorization: `Bearer ${token}` },
       });
 
